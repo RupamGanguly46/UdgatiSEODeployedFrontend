@@ -1,0 +1,155 @@
+.scope {
+  min-height: 100vh;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+}
+
+.light {
+  --bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --text: #333;
+  --accent: #4CAF50;
+  --primary: #007bff;
+  --card-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  --tab-active: #e9f5ff;
+  --tab-inactive: #ffffff;
+  --border: #ddd;
+}
+
+.dark {
+  --bg: #1a1a1a;
+  --card-bg: #242424;
+  --text: #fff;
+  --accent: #4CAF50;
+  --primary: #007bff;
+  --card-shadow: 0 8px 25px rgba(255,255,255,0.05);
+  --tab-active: rgba(255,255,255,0.15);
+  --tab-inactive: transparent;
+  --border: #444;
+}
+
+.card {
+  width: 760px;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.themeButton {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 15px;
+  background: transparent;
+  color: var(--text);
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  cursor: pointer;
+  background: var(--tab-inactive);
+  color: var(--text);
+}
+
+.tabActive {
+  background: var(--tab-active);
+}
+
+.outputBox {
+  padding: 10px;
+}
+
+.section {
+  padding: 15px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  margin-bottom: 15px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionTitle {
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  max-height: 300px;
+  overflow-y: auto;
+  color: var(--text);
+}
+
+.copyBtn {
+  padding: 6px 12px;
+  font-size: 13px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+body { font-family: Arial, sans-serif; background:#f6f7fb; margin:0; padding:20px; }
+.app { max-width:1200px; margin:0 auto; }
+h1 { text-align:center; }
+.controls { display:flex; justify-content:center; gap:10px; margin-bottom:20px; }
+input { width:420px; padding:10px; border:1px solid #ccc; border-radius:6px; }
+button { padding:10px 20px; background:#2563eb; color:white; border:none; border-radius:6px; cursor:pointer; }
+.card { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.06); }
+.grid { display:grid; grid-template-columns:1fr 320px; gap:20px; }
+.competitor { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; }
+.competitor:last-child { border-bottom:none; }
+.link { color:#2563eb; cursor:pointer; text-decoration:underline; }
+.selected { background:#eef2ff; }
+.metrics { display:flex; flex-direction:column; gap:4px; margin-top:10px; }
+.metric { display:flex; justify-content:space-between; }
+.all-list { max-height:500px; overflow:auto; }
