@@ -11,61 +11,51 @@ on:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' || 
+        (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+
     permissions:
-       id-token: write
-       contents: read
+      id-token: write
+      contents: read
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           submodules: false
           lfs: false
 
-      # Install deps for Vite
-      - name: Install Node dependencies
-        run: npm install
+      # Azure will handle the build itself.
+      # DO NOT install or build locally.
+      # This ensures Azure correctly injects VITE_ environment variables.
 
-      # Build Vite (creates dist/)
-      - name: Build Vite App
-        run: npm run build
-
-      # OIDC token (same as your working project)
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
-        with:
-           script: |
-                const coredemo = require('@actions/core')
-                return await coredemo.getIDToken()
-           result-encoding: string
-
-      # Deploy to Azure Static Web Apps
-      - name: Build And Deploy
-        id: builddeploy
+      - name: Deploy to Azure Static Web Apps
+        id: swa_deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
+          action: upload
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_SMOKE_0A81C6810 }}
-          action: "upload"
 
-          # IMPORTANT FOR VITE:
-          app_location: "/"       # Where your package.json is
-          output_location: "dist" # Vite output folder
-          api_location: ""        # No backend here
-          github_id_token: ${{ steps.idtoken.outputs.result }}
+          # Your app code is in the root
+          app_location: "/"
 
+          # Azure will run "npm install" and "npm run build" automatically
+          # using the environment variables defined in the Azure portal
+          output_location: "dist"
+
+          # No API backend
+          api_location: ""
+
+  # Closing PR workflow
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
 
     steps:
-      - name: Close Pull Request
+      - name: Close PR Environment
         uses: Azure/static-web-apps-deploy@v1
         with:
-          action: "close"
+          action: close
