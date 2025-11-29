@@ -17,7 +17,7 @@ export default function Dashboard(){
     try{
       // const res = await fetch(`/projectA/analyze?url=${encodeURIComponent(url)}`)
       const res = await fetch(
-  `http://127.0.0.1:8000/projectA/analyze?url=${encodeURIComponent(url)}`
+  `${import.meta.env.VITE_API_URL}/projectA/analyze?url=${encodeURIComponent(url)}`
 );
       const json = await res.json()
       setData(json)
