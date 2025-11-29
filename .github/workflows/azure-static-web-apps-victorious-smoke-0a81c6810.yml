@@ -11,14 +11,19 @@ on:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || 
-        (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
 
     permissions:
       id-token: write
       contents: read
+
+    # provide VITE_ envs here so npm run build sees them
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}        # set in GitHub Secrets
+      # add other VITE_ vars if you have them:
+      # VITE_SOMETHING: ${{ secrets.VITE_SOMETHING }}
 
     steps:
       - name: Checkout repository
@@ -27,35 +32,39 @@ jobs:
           submodules: false
           lfs: false
 
-      # Azure will handle the build itself.
-      # DO NOT install or build locally.
-      # This ensures Azure correctly injects VITE_ environment variables.
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-      - name: Deploy to Azure Static Web Apps
-        id: swa_deploy
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build Vite project
+        run: npm run build
+
+      # Optional: show dist contents for debugging
+      - name: List dist folder
+        run: ls -la dist || true
+
+      - name: Deploy to Azure Static Web Apps (upload artifact)
+        id: deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          action: upload
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_SMOKE_0A81C6810 }}
+          action: upload
+          app_location: "/"            # project root where package.json lives
+          output_location: "dist"      # Vite output folder
+          api_location: ""             # no API in this repo
+          skip_app_build: true         # we already built locally
+          app_artifact_location: "dist" # explicitly point to the artifact to upload
 
-          # Your app code is in the root
-          app_location: "/"
-
-          # Azure will run "npm install" and "npm run build" automatically
-          # using the environment variables defined in the Azure portal
-          output_location: "dist"
-
-          # No API backend
-          api_location: ""
-
-  # Closing PR workflow
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
-
     steps:
-      - name: Close PR Environment
+      - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: close
