@@ -1,11 +1,21 @@
-import React from "react";
-import Dashboard from "./components/Dashboard"; // or other components
+// import Dashboard from "./components/SeoTextAnalyzer"; // or other components
+
+// export default function AppB() {
+//   return (
+//     <div className="app">
+//       <h1>Project B</h1>
+//       <Dashboard />
+//     </div>
+//   );
+// }
+
+import { Routes, Route } from "react-router-dom";
+import SeoTextAnalyzer from "./components/SeoTextAnalyzer";
 
 export default function AppB() {
   return (
-    <div className="app">
-      <h1>Project B</h1>
-      <Dashboard />
-    </div>
+    <Routes>
+      <Route path="/" element={<SeoTextAnalyzer />} />
+    </Routes>
   );
 }

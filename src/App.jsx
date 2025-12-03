@@ -100,9 +100,9 @@ export default function App() {
           {/* Nav Links */}
           <nav style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             <SidebarLink to="/" icon="🏠" label="Home" collapsed={collapsed} />
-            <SidebarLink to="/projectA" icon="🅐" label="Project A" collapsed={collapsed} />
-            <SidebarLink to="/projectB" icon="🅑" label="Project B" collapsed={collapsed} />
-            <SidebarLink to="/projectC" icon="©️" label="Project C" collapsed={collapsed} />
+            <SidebarLink to="/projectA" icon="🏳️" label="Competitor Analysis (NLP)" collapsed={collapsed} />
+            <SidebarLink to="/projectB" icon="🏳️" label="Content Readability Analyzer (GRU)" collapsed={collapsed} />
+            <SidebarLink to="/projectC" icon="🏳️" label="Website Structure Optimizer (GenAI)" collapsed={collapsed} />
           </nav>
         </aside>
 
@@ -166,9 +166,9 @@ function Home() {
         display: "flex",
         gap: "20px"
       }}>
-        <Card title="Project A" desc="SEO Competitor Analysis(SERP) Dashboard" />
-        <Card title="Project B" desc="Your second app" />
-        <Card title="Project C" desc="SEO Content Optimizer (LangChain + Azure OpenAI LLMs) " />
+        <Card title="Competitor Analysis Dashboard" desc="SEO Competitor Analysis Dashboard (SERP + Moz + Playwright + NLP eg. Nltk, TF-IDF, Jaccard Similarity)" />
+        <Card title="Content Readability Analyzer" desc="SEO Website Text/Content Readability analyzer for user-side optimization (Self-trained on Colab, multi-dataset, GRU Models)" />
+        <Card title="Website Structure Optimizer" desc="SEO Website Structure Optimizer for both Search Engines and AIs (LangChain + Azure OpenAI LLMs)" />
       </div>
     </div>
   );

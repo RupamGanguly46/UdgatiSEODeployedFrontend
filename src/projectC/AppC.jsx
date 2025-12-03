@@ -323,7 +323,7 @@ function AppC() {
       <div className={styles.card}>
         {/* TITLE + THEME SWITCH */}
         <div className={styles.headerRow}>
-          <h1 className={styles.title}>SEO Optimization Tool</h1>
+          <h1 className={styles.title}>Website Structure Optimizer</h1>
 
           <button
             onClick={() => setDarkMode(!darkMode)}
